@@ -1,0 +1,86 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background: #87CEEB; /* Sky color */
+}
+
+#game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    transform: scale(1);
+    transition: transform 0.2s ease-in-out;
+}
+
+#terrain-container {
+    position: absolute;
+    width: 300%;
+    height: 300%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateX(var(--inclination-angle, 75deg)) rotate(0deg);
+    transform-origin: center;
+}
+
+#terrain {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('images/terrain.png'); /* Walkable terrain PNG */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes walk {
+    0% {
+        background-image: url('images/character_1.png');
+    }
+    50% {
+        background-image: url('images/character_2.png');
+    }
+    100% {
+        background-image: url('images/character_1.png');
+    }
+}
+
+#character {
+    position: absolute;
+    width: var(--character-size, 32px);
+    height: var(--character-size, 32px);
+    background-image: url('images/character_1.png'); /* Character PNG */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    z-index: 1; /* Above terrain */
+}
+
+#character.walking {
+    animation: walk 1.0s steps(2) infinite;
+}
+
+.obstacle {
+    position: absolute;
+    width: var(--obstacle-size, 50px);
+    height: var(--obstacle-size, 50px);
+    background-color: black;
+    transform: translate(-50%, -50%);
+}
+
+.obstacle-label-fixed {
+    position: fixed;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 2px 5px;
+    border-radius: 4px;
+    pointer-events: none;
+}

@@ -1,0 +1,55 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "map.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "file.lastUsedOpenFilter": "Todos los archivos (*)",
+    "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "map.tmx": {
+            "scale": 1.4091666666666667,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 142.6374926079243,
+                "y": 160.73329390892962
+            }
+        },
+        "mountains_0.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tileset_1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "water_1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "//wsl.localhost/Ubuntu/home/salva/projects/thu-king-interactive_cv/assets",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "openFiles": [
+        "map.tmx"
+    ],
+    "project": "thu-interactive-curriculum.tiled-project",
+    "recentFiles": [
+        "map.tmx",
+        "tileset_1.tsx",
+        "water_1.tsx",
+        "mountains_0.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
