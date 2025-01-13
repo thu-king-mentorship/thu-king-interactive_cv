@@ -84,20 +84,20 @@ html, body {
     position: absolute;
 }
 
-@keyframes walk {
+@keyframes walk_forward {
     0% {
-        background-image: url('images/character_1.png');
+        background-image: url('images/character_forward_1.png');
     }
     50% {
-        background-image: url('images/character_2.png');
+        background-image: url('images/character_forward_2.png');
     }
     100% {
-        background-image: url('images/character_1.png');
+        background-image: url('images/character_forward_1.png');
     }
 }
 
 #character {
-    background-image: url('images/character_1.png');
+    background-image: url('images/character_forward_1.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -110,7 +110,7 @@ html, body {
 }
 
 #character.walking {
-    animation: walk 1.0s steps(2) infinite;
+    animation: walk_forward 1.0s steps(2) infinite;
 }
 
 .collision {
