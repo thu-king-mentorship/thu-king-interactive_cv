@@ -7,15 +7,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="game-container">
-        <div id="terrain-container">
-            <div id="terrain">
-                <div class="obstacle" id="obstacle1" style="top: 30%; left: 40%;"></div>
-                <div class="obstacle" id="obstacle2" style="top: 50%; left: 60%;"></div>
-                <div class="obstacle" id="obstacle3" style="top: 70%; left: 50%;"></div>
+    <div id="camera-container">
+        <div id="game-container">
+            <div id="terrain-container">
+                <div id="terrain">
+                    <div class="collision obstacle interactable" id="interactable1" data-row="6" data-col="14"></div>
+                    <div class="collision obstacle interactable" id="interactable2" data-row="15" data-col="9"></div>
+                    <div class="collision obstacle interactable" id="interactable3" data-row="9" data-col="21"></div>
+                    <div class="collision obstacle" id="obstacle1" data-row="14" data-col="19"></div>
+                </div>
             </div>
+            <div id="character"></div>
         </div>
-        <div id="character"></div>
     </div>
     <script src="config.js"></script>
     <script src="map.js"></script>

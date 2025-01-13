@@ -14,10 +14,10 @@
         },
         "map.tmx": {
             "scale": 1.4091666666666667,
-            "selectedLayer": 2,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 142.6374926079243,
-                "y": 160.73329390892962
+                "x": 249.08338261383795,
+                "y": 200.4730928444707
             }
         },
         "mountains_0.tsx": {
@@ -43,9 +43,9 @@
     "project": "thu-interactive-curriculum.tiled-project",
     "recentFiles": [
         "map.tmx",
+        "mountains_0.tsx",
         "tileset_1.tsx",
-        "water_1.tsx",
-        "mountains_0.tsx"
+        "water_1.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

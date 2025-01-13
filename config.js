@@ -13,7 +13,7 @@ const config = {
      * Speed at which the player moves.
      * @type {number}
      */
-    moveSpeed: 20,
+    moveSpeed: 50,
 
     /**
      * Adjustment for preventing the player from getting stuck.
@@ -46,14 +46,25 @@ const config = {
     inclinationAngle: 75,
 
     /**
-     * Size of the character in pixels.
+     * Base size of the tiles.
      * @type {number}
      */
-    characterSize: 32,
+    baseTileSize: 16,
 
     /**
-     * Size of the obstacles in pixels.
+     * Scale factor for the terrain.
      * @type {number}
      */
-    obstacleSize: 50
+    terrainScaleFactor: 3,
+
+    /**
+     * Size of the virtual camera.
+     * @type {{width: number, height: number}}
+     * @property {number} width - Width of the virtual camera.
+     * @property {number} height - Height of the virtual camera.
+     */
+    resolution: {
+        width: 1024,
+        height: 768,
+    }
 };
