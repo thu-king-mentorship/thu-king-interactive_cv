@@ -113,8 +113,6 @@ function getTerrainDimensions(callback) {
  * @param {number} startCol - The starting column for the character.
  */
 function setCharacterStartPosition(startRow, startCol) {
-    startRow = 10;
-    startCol = 10;
     const localTileWidth = terrainContainer.offsetWidth / columnCount;
     const localTileHeight = terrainContainer.offsetHeight / rowCount;
     offsetX = terrainContainer.offsetWidth / 2 - localTileWidth * startCol - localTileWidth * 0.25;
