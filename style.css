@@ -1,45 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Tiny5&display=swap');
+
 :root {
-    --tile-size: 32px;
     --terrain-scale-factor: 1;
+    --tile-size: 32px;
 }
 
 html, body {
+    background: black;
+    height: 100%;
     margin: 0;
+    overflow: hidden;
     padding: 0;
     width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: black;
+}
+
+#info-container {
+    color: #fff;
+    font-family: "Tiny5", serif;
+    left: 20px;
+    pointer-events: none;
+    position: absolute;
+    text-align: left;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+    top: 20px;
+    z-index: 100;
+}
+
+#name {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 0;
+}
+
+#subtitle {
+    font-size: 20px;
+    font-weight: normal;
+    margin: 5px 0 0 0;
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    #info-container {
+        left: 10px;
+        top: 10px;
+    }
+
+    #name {
+        font-size: 18px;
+    }
+
+    #subtitle {
+        font-size: 14px;
+    }
 }
 
 #camera-container {
-    position: absolute;
-    overflow: hidden;
+    align-items: center;
     background: #87CEEB;
     display: flex;
     justify-content: center;
-    align-items: center;
+    overflow: hidden;
+    position: absolute;
 }
 
 #game-container {
-    transform-origin: center center 0px;
     overflow: hidden;
+    transform-origin: center center 0px;
 }
 
 #terrain-container {
+    left: 50%;
     overflow: hidden;
     position: absolute;
     top: 50%;
-    left: 50%;
     transform-origin: center;
 }
 
 #terrain {
-    position: absolute;
     background-image: url('images/terrain.png');
-    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
 }
 
 @keyframes walk {
@@ -55,15 +97,15 @@ html, body {
 }
 
 #character {
-    position: absolute;
-    width: calc(var(--tile-size) * 0.5);
-    height: calc(var(--tile-size) * 0.5);
     background-image: url('images/character_1.png');
-    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    background-size: contain;
     bottom: 50%;
+    height: calc(var(--tile-size) * 0.5);
     left: 50%;
+    position: absolute;
+    width: calc(var(--tile-size) * 0.5);
     z-index: 1;
 }
 
@@ -72,10 +114,10 @@ html, body {
 }
 
 .collision {
-    position: absolute;
-    width: var(--tile-size);
     height: var(--tile-size);
+    position: absolute;
     transform: translate(0%, calc(50% + var(--tile-size) * 0.75));
+    width: var(--tile-size);
 }
 
 .interactable {
@@ -83,29 +125,29 @@ html, body {
 }
 
 .interactable-label-fixed {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 4px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 2px 5px;
+    pointer-events: none;
     position: fixed;
     text-align: center;
-    color: white;
-    font-weight: bold;
-    font-size: 14px;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 2px 5px;
-    border-radius: 4px;
-    pointer-events: none;
 }
 
 .grid-cell {
-    position: absolute;
-    width: var(--tile-size);
-    height: var(--tile-size);
-    transform: translate(0%, calc(50% + var(--tile-size) * 0.75));
     border: 1px solid black;
     display: flex;
+    height: var(--tile-size);
+    position: absolute;
+    transform: translate(0%, calc(50% + var(--tile-size) * 0.75));
+    width: var(--tile-size);
 }
 
 .grid-cell-text {
     align-content: center;
+    height: 100%;
     text-align: center;
     width: 100%;
-    height: 100%;
 }
