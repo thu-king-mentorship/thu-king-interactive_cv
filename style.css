@@ -96,6 +96,30 @@ html, body {
     }
 }
 
+@keyframes walk_backward {
+    0% {
+        background-image: url('images/character_backward_1.png');
+    }
+    50% {
+        background-image: url('images/character_backward_2.png');
+    }
+    100% {
+        background-image: url('images/character_backward_1.png');
+    }
+}
+
+@keyframes walk_rotate_eft {
+    0% {
+        background-image: url('images/character_forward_1.png');
+    }
+}
+
+@keyframes walk_rotate_right {
+    0% {
+        background-image: url('images/character_forward_2.png');
+    }
+}
+
 #character {
     background-image: url('images/character_forward_1.png');
     background-position: center;
@@ -109,8 +133,28 @@ html, body {
     z-index: 1;
 }
 
-#character.walking {
-    animation: walk_forward 1.0s steps(2) infinite;
+#character.facing_forward {
+    background-image: url('images/character_forward_1.png');
+}
+
+#character.facing_backward {
+    background-image: url('images/character_backward_1.png');
+}
+
+#character.facing_left {
+    background-image: url('images/character_left_1.png');
+}
+
+#character.facing_right {
+    background-image: url('images/character_right_1.png');
+}
+
+#character.walking_forward {
+    animation: walk_forward var(--movement-animation-duration) steps(2) infinite;
+}
+
+#character.walking_backward {
+    animation: walk_backward var(--movement-animation-duration) steps(2) infinite;
 }
 
 .collision {

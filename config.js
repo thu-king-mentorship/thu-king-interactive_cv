@@ -13,7 +13,7 @@ const config = {
      * Speed at which the player moves.
      * @type {number}
      */
-    moveSpeed: 50,
+    moveSpeed: 20,
 
     /**
      * Adjustment for preventing the player from getting stuck.
@@ -66,5 +66,27 @@ const config = {
     resolution: {
         width: 1024,
         height: 768,
+    },
+
+    /**
+     * Animation configuration for the player.
+     * @type {{animateMovement: {directions: {forward: boolean, backward: boolean, left: boolean, right: boolean}, speed: number}}} 
+     * @property {object} animateMovement - Configuration for the player's movement animation.
+     * @property {object} directions - Directions in which the player can move.
+     * @property {boolean} directions.forward - Whether the animation should play when the player moves forward.
+     * @property {boolean} directions.backward - Whether the animation should play when the player moves backward.
+     * @property {boolean} directions.left - Whether the animation should play when the player moves left.
+     * @property {boolean} directions.right - Whether the animation should play when the player moves right.
+     * @property {number} speed - Speed at which the animation should play.
+     */
+    animateMovement: {
+        directions: {
+            forward: true,
+            backward: true,
+            left: false,
+            right: false,
+        },
+        duration: 0.75,
     }
+
 };

@@ -556,9 +556,11 @@ function handleKeyDown(e) {
             newY += config.moveSpeed * Math.cos((characterAngle * Math.PI) / 180);
             isMoving = true;
             movingDirection = MOVEMENT_FORWARD;
-            if (!character.classList.contains('walking')) {
-                character.classList.add('walking');
+            if (!config.animateMovement.directions.forward) {
+                break;
             }
+            character.classList.remove('facing_backward', 'facing_left', 'facing_right');
+            character.classList.add('walking_forward', 'facing_forward');
             break;
         case 'ArrowDown':
             if (!checkMovementPossible(MOVEMENT_BACKWARD)) {
@@ -568,15 +570,27 @@ function handleKeyDown(e) {
             newY -= config.moveSpeed * Math.cos((characterAngle * Math.PI) / 180);
             isMoving = true;
             movingDirection = MOVEMENT_BACKWARD;
-            if (!character.classList.contains('walking')) {
-                character.classList.add('walking');
+            if (!config.animateMovement.directions.backward) {
+                break;
             }
+            character.classList.remove('facing_forward', 'facing_left', 'facing_right');
+            character.classList.add('walking_backward', 'facing_backward');
             break;
         case 'ArrowLeft':
             characterAngle = (characterAngle + config.rotationIncrement) % 360;
+            if (!config.animateMovement.directions.left) {
+                break;
+            }
+            character.classList.remove('facing_forward', 'facing_backward', 'facing_right');
+            character.classList.add('facing_left');
             break;
         case 'ArrowRight':
             characterAngle = (characterAngle - config.rotationIncrement + 360) % 360;
+            if (!config.animateMovement.directions.right) {
+                break;
+            }
+            character.classList.remove('facing_forward', 'facing_backward', 'facing_left');
+            character.classList.add('facing_right');
             break;
     }
 
@@ -594,7 +608,7 @@ function handleKeyUp(e) {
     if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
         isMoving = false;
         movingDirection = MOVEMENT_STATIONARY;
-        character.classList.remove('walking');
+        character.classList.remove('walking_forward', 'walking_backward');
     }
 }
 
@@ -671,6 +685,7 @@ function setupEventListeners() {
 function Initialize() {
     document.documentElement.style.setProperty('--terrain-scale-factor', config.terrainScaleFactor);
     document.documentElement.style.setProperty('--tile-size', `${config.baseTileSize}px`);
+    document.documentElement.style.setProperty('--movement-animation-duration', `${config.animateMovement.duration}s`);
     getTerrainDimensions(() => {
         updateSize();
         setCharacterStartPosition(9, 11);
