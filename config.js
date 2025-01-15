@@ -131,6 +131,9 @@ const config = {
      * @type {string[]}
      */
     musicList: [
+        'music/Michiko Naruke - WILD ARMS - Migratory Bird of the Wilderness (Rudy\'s Theme).mp3',
+        'music/Nobuo Uematsu - Final Fantasy IV - Main Theme of Final Fantasy IV.mp3',
+        'music/Nobuo Uematsu - Final Fantasy VI - Terra\'s Theme.mp3'
     ]
 
 };
