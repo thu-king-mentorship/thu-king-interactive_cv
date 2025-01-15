@@ -541,14 +541,17 @@ function update() {
  * @param {KeyboardEvent} e - The keydown event.
  */
 function handleKeyDown(e) {
-    const validKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
-    if (!validKeys.includes(e.key)) return;
+    const validKeys = ['arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'w', 'a', 's', 'd'];
+    if (!validKeys.includes(e.key.toLowerCase())) {
+        return;
+    }
 
     let newX = offsetX;
     let newY = offsetY;
 
     switch (e.key) {
         case 'ArrowUp':
+        case 'w':
             if (!checkMovementPossible(MOVEMENT_FORWARD)) {
                 break;
             }
@@ -563,6 +566,7 @@ function handleKeyDown(e) {
             character.classList.add('walking_forward', 'facing_forward');
             break;
         case 'ArrowDown':
+        case 's':
             if (!checkMovementPossible(MOVEMENT_BACKWARD)) {
                 break;
             }
@@ -577,6 +581,7 @@ function handleKeyDown(e) {
             character.classList.add('walking_backward', 'facing_backward');
             break;
         case 'ArrowLeft':
+        case 'a':
             characterAngle = (characterAngle + config.rotationIncrement) % 360;
             if (!config.animateMovement.directions.left) {
                 break;
@@ -585,6 +590,7 @@ function handleKeyDown(e) {
             character.classList.add('facing_left');
             break;
         case 'ArrowRight':
+        case 'd':
             characterAngle = (characterAngle - config.rotationIncrement + 360) % 360;
             if (!config.animateMovement.directions.right) {
                 break;
@@ -605,7 +611,11 @@ function handleKeyDown(e) {
  * @param {KeyboardEvent} e - The keyup event.
  */
 function handleKeyUp(e) {
-    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+    const validKeys = ['arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'w', 'a', 's', 'd'];
+    if (!validKeys.includes(e.key.toLowerCase())) {
+        return;
+    }
+    if (['arrowup', 'w', 'arrowdown', 's'].includes(e.key.toLowerCase())) {
         isMoving = false;
         movingDirection = MOVEMENT_STATIONARY;
         character.classList.remove('walking_forward', 'walking_backward');
