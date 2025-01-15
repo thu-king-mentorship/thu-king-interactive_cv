@@ -237,3 +237,76 @@ html, body {
     text-align: center;
     width: 100%;
 }
+
+/* Music player */
+
+#music-player {
+    position: absolute;
+    bottom: clamp(5px, 2vh, 20px);
+    left: clamp(5px, 2vw, 20px);
+    z-index: 100;
+    color: #fff;
+    font-family: "Tiny5", serif;
+    text-align: center;
+    pointer-events: auto;
+    width: clamp(100px, 15vw, 200px);
+    overflow: hidden;
+}
+
+#music-controls {
+    display: flex;
+    gap: clamp(5px, 1vw, 10px);
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.7);
+    padding: clamp(3px, 0.5vh, 10px) clamp(5px, 1vw, 15px);
+    border-radius: clamp(3px, 1vw, 10px);
+}
+
+#music-controls button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: clamp(12px, 2.5vw, 16px);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+#music-controls button:hover {
+    transform: scale(1.2);
+}
+
+#music-controls button:disabled {
+    color: #808080;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#music-controls i {
+    pointer-events: none;
+}
+
+#song-title {
+    margin-top: clamp(3px, 0.5vh, 10px);
+    font-size: clamp(10px, 2vw, 16px);
+    opacity: 0.8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    position: relative;
+    display: inline-block;
+}
+
+@keyframes scrollTitle {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+#song-title.scrolling {
+    animation: scrollTitle 10s linear infinite;
+}

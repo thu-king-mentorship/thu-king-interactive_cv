@@ -87,6 +87,23 @@ const config = {
             right: false,
         },
         duration: 0.75,
-    }
+    },
+
+    /**
+     * Configuration for the audio player.
+     * @type {{loop: boolean, autoplay: boolean, volume: number, fadeOutDuration: number, fadeInDuration: number}}
+     * @property {boolean} loop - Whether the audio should loop.
+     * @property {boolean} autoplay - Whether the audio should play automatically.
+     * @property {number} volume - Volume of the audio.
+     * @property {number} fadeOutDuration - Duration of the fade out effect.
+     * @property {number} fadeInDuration - Duration of the fade in effect.
+     */
+    audioPlayer: {
+        autoplay: false,
+        loop: false,
+        volume: 0.5,
+        fadeOutDuration: 3000,
+        fadeInDuration: 1000,
+    },
 
 };
