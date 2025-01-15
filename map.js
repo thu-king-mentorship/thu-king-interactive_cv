@@ -53,6 +53,24 @@ const collisions = Array.from(document.querySelectorAll('.collision'));
 const character = document.getElementById('character');
 
 /**
+ * The textbox element
+ * @type {HTMLElement}
+ */
+const textbox = document.createElement('div');
+textbox.id = 'textbox';
+textbox.style.display = 'none';
+cameraContainer.appendChild(textbox);
+
+/**
+ * The status bar element
+ * @type {HTMLElement}
+ */
+const statusBar = document.createElement('div');
+statusBar.id = 'status-bar';
+statusBar.style.display = 'none';
+cameraContainer.appendChild(statusBar);
+
+/**
  * A map tracking active labels for interactable collisions.
  * @type {Map<string, HTMLElement>}
  */
@@ -87,8 +105,14 @@ let collisionsWithinRelevanceRadius = []; // Tracks all collisions within radius
 let collisionsWithinCollisionRadius = []; // Tracks all collisions the character is colliding with
 
 let moveSpeed = 0; // Speed at which the player moves
+let canMove = true; // Whether the player can move
 let isMoving = false; // Whether the character is currently moving
-let movingDirection = 0;
+let movingDirection = 0; // The direction in which the character is moving
+
+let isTextboxVisible = false; // Whether the textbox is currently visible
+let currentInteractable = null; // The interactable element the player is inspecting
+let currentItems = []; // The items of the current interactable
+let selectedItemIndex = 0; // Index of the currently selected item in the items array
 
 /**
  * Retrieves the dimensions of the terrain image.
@@ -386,6 +410,19 @@ function updateCollisionRadius() {
     const collisionRadiusSquared = Math.pow(config.collisionRadius, 2);
     collisionsWithinCollisionRadius = collisionsWithinRelevanceRadius
         .filter(({ distanceSquared }) => distanceSquared <= collisionRadiusSquared);
+    const interactable = collisionsWithinCollisionRadius.find(({ htmlElement }) =>
+        htmlElement.classList.contains('interactable')
+    );
+    if (interactable) {
+        currentInteractable = interactable.htmlElement;
+        const interactableId = currentInteractable.id;
+        currentItems = config.interactables[interactableId] || [];
+        selectedItemIndex = 0;
+    } else {
+        currentInteractable = null;
+        currentItems = [];
+        statusBar.style.display = 'none';
+    }
 }
 
 /**
@@ -435,7 +472,7 @@ function updateInteractableLabels() {
             document.body.appendChild(label);
             interactableCollisionsLabels.set(id, label);
         }
-        label.textContent = id;
+        label.textContent = htmlElement.dataset.name;
         label.style.left = `${rect.left + rect.width / 2}px`;
         label.style.top = `${rect.top - 20}px`;
     }
@@ -541,8 +578,37 @@ function update() {
  * @param {KeyboardEvent} e - The keydown event.
  */
 function handleKeyDown(e) {
-    const validKeys = ['arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'w', 'a', 's', 'd'];
+    const validKeys = ['arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'w', 'a', 's', 'd', 'q', 'e'];
     if (!validKeys.includes(e.key.toLowerCase())) {
+        return;
+    }
+
+    // Textbox logic
+    if (isTextboxVisible) {
+        switch (e.key) {
+            case 'ArrowUp':
+            case 'w':
+                navigateItems(-1);
+                break;
+            case 'ArrowDown':
+            case 's':
+                navigateItems(1);
+                break;
+            case 'q':
+                hideTextbox();
+                break;
+        }
+        return;
+    }
+
+    // Interactable logic
+    if (e.key === 'e' && currentInteractable) {
+        showTextbox();
+        return;
+    }
+
+    // Movement logic
+    if (!canMove) {
         return;
     }
 
@@ -615,6 +681,10 @@ function handleKeyUp(e) {
     if (!validKeys.includes(e.key.toLowerCase())) {
         return;
     }
+    // Movement logic
+    if (!canMove) {
+        return;
+    }
     if (['arrowup', 'w', 'arrowdown', 's'].includes(e.key.toLowerCase())) {
         isMoving = false;
         movingDirection = MOVEMENT_STATIONARY;
@@ -678,6 +748,74 @@ function handleResize() {
     updateElements();
     updateGrid();
     updateDrawnGizmos();
+}
+
+/**
+ * Shows the textbox with the current interactable's details.
+ */
+function showTextbox() {
+    if (!currentInteractable || currentItems.length === 0 || isTextboxVisible) {
+        return;
+    }
+
+    canMove = false;
+
+    textbox.innerHTML = '';
+    currentItems.forEach((item, index) => {
+        const itemElement = document.createElement('div');
+        itemElement.className = 'textbox-item';
+        itemElement.textContent = `${item.subtitle}: ${item.title}`;
+        if (index === selectedItemIndex) {
+            itemElement.classList.add('selected');
+        }
+        textbox.appendChild(itemElement);
+    });
+
+    statusBar.textContent = currentItems[selectedItemIndex]?.status || '';
+    textbox.style.display = 'block';
+    statusBar.style.display = 'block';
+    isTextboxVisible = true;
+}
+
+/**
+ * Hides the textbox and resumes movement.
+ */
+function hideTextbox() {
+    canMove = true;
+    textbox.style.display = 'none';
+    statusBar.style.display = 'none';
+    isTextboxVisible = false;
+}
+
+/**
+ * Updates the status bar with a one-liner from the interactable items.
+ */
+function updateStatusBar() {
+    if (!currentItems.length) {
+        return;
+    }
+    statusBar.textContent = currentItems[selectedItemIndex];
+    statusBar.style.display = 'block';
+}
+
+/**
+ * Navigates the items in the textbox and updates the status bar.
+ * @param {number} direction - The direction to navigate (1 for down, -1 for up).
+ */
+function navigateItems(direction) {
+    if (!isTextboxVisible || currentItems.length === 0) {
+        return;
+    }
+
+    // Update selected item index
+    selectedItemIndex = (selectedItemIndex + direction + currentItems.length) % currentItems.length;
+
+    // Update the UI
+    const itemElements = Array.from(textbox.children);
+    itemElements.forEach((el, index) => el.classList.toggle('selected', index === selectedItemIndex));
+
+    // Update the status bar
+    statusBar.textContent = currentItems[selectedItemIndex]?.status || '';
 }
 
 /**

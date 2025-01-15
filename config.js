@@ -90,6 +90,26 @@ const config = {
     },
 
     /**
+     * Interactable items mapped by ID.
+     * @type {{interactable1: string[], interactable2: string[], interactable3: string[]}}
+     * @property {string[]} interactableN - Interactable items for the N object.
+     */
+    interactables: {
+        interactable1: [
+            { subtitle: "Year-Year", title: "Lorem ipsum", status: "Lorem ipsum dolor sit amet" },
+            { subtitle: "Year-Year", title: "Lorem ipsum", status: "Lorem ipsum dolor sit amet" },
+        ],
+        interactable2: [
+            { subtitle: "Year-Year", title: "Lorem ipsum", status: "Lorem ipsum dolor sit amet" },
+            { subtitle: "Year-Year", title: "Lorem ipsum", status: "Lorem ipsum dolor sit amet" },
+        ],
+        interactable3: [
+            { subtitle: "Interest1", title: "Lorem ipsum", status: "Lorem ipsum dolor sit amet" },
+            { subtitle: "Interest2", title: "Lorem ipsum", status: "Lorem ipsum dolor sit amet" },
+        ],
+    },
+
+    /**
      * Configuration for the audio player.
      * @type {{loop: boolean, autoplay: boolean, volume: number, fadeOutDuration: number, fadeInDuration: number}}
      * @property {boolean} loop - Whether the audio should loop.

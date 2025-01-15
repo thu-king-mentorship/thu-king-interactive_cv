@@ -5,6 +5,7 @@
 :root {
     --terrain-scale-factor: 1;
     --tile-size: 32px;
+    --gap: clamp(10px, 2vw, 20px);
 }
 
 html, body {
@@ -220,6 +221,57 @@ html, body {
     text-align: center;
 }
 
+#textbox {
+    position: absolute;
+    right: var(--gap);
+    top: var(--gap);
+    bottom: calc(var(--gap) + clamp(85px, 5vw, 170px));
+    width: clamp(200px, 20vw, 400px);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: clamp(10px, 2vw, 20px);
+    border-radius: clamp(10px, 2vw, 15px);
+    overflow-y: auto;
+    font-family: "Tiny5", serif;
+    font-size: clamp(14px, 1.5vw, 16px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(5px, 1vw, 10px);
+    z-index: 100;
+}
+
+.textbox-item {
+    padding: 5px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.textbox-item:hover,
+.textbox-item.selected {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#status-bar {
+    position: absolute;
+    bottom: var(--gap);
+    left: calc(clamp(100px, 15vw, 200px) + clamp(20px, 5vw, 100px));
+    right: var(--gap);
+    height: auto;
+    min-height: 40px;
+    max-height: 40px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: clamp(5px, 1vw, 10px);
+    border-radius: clamp(5px, 1vw, 10px);
+    text-align: center;
+    font-family: "Tiny5", serif;
+    font-size: clamp(12px, 1.5vw, 14px);
+    z-index: 100;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 /* Grid */
 
 .grid-cell {
@@ -242,8 +294,8 @@ html, body {
 
 #music-player {
     position: absolute;
-    bottom: clamp(5px, 2vh, 20px);
-    left: clamp(5px, 2vw, 20px);
+    bottom: var(--gap);
+    left: var(--gap);
     z-index: 100;
     color: #fff;
     font-family: "Tiny5", serif;
@@ -251,6 +303,9 @@ html, body {
     pointer-events: auto;
     width: clamp(100px, 15vw, 200px);
     overflow: hidden;
+    height: auto;
+    min-height: clamp(50px, 6.5vw, 60px);
+    max-height: clamp(50px, 6.5vw, 60px);
 }
 
 #music-controls {
