@@ -1,6 +1,3 @@
-const musicList = [
-];
-
 const songTitle = document.getElementById('song-title');
 const playPauseBtn = document.getElementById('play-pause-btn');
 const muteBtn = document.getElementById('mute-btn');
@@ -18,15 +15,15 @@ let audioPlayer;
  */
 function initializeMusicPlayer() {
     // No tracks available
-    if (musicList.length === 0) {
+    if (config.musicList.length === 0) {
         songTitle.textContent = 'No themes available';
         toggleButtons(true);
         return;
     }
 
     // Initialize audio player
-    currentTrackIndex = Math.floor(Math.random() * musicList.length);
-    audioPlayer = new Audio(musicList[currentTrackIndex]);
+    currentTrackIndex = Math.floor(Math.random() * config.musicList.length);
+    audioPlayer = new Audio(config.musicList[currentTrackIndex]);
     audioPlayer.autoplay = config.audioPlayer.autoplay;
     audioPlayer.loop = config.audioPlayer.loop;
     audioPlayer.volume = config.audioPlayer.volume;
@@ -103,7 +100,7 @@ function fadeOutAndChangeTrack(nextTrack) {
             pause();
             audioPlayer.currentTime = 0;
             audioPlayer.volume = currentVolume;
-            audioPlayer.src = musicList[nextTrack];
+            audioPlayer.src = config.musicList[nextTrack];
             play();
             toggleButtons(false);
         }
@@ -114,7 +111,7 @@ function fadeOutAndChangeTrack(nextTrack) {
  * Play next track
  */
 function playNextTrack() {
-    currentTrackIndex = (currentTrackIndex + 1) % musicList.length;
+    currentTrackIndex = (currentTrackIndex + 1) % config.musicList.length;
     fadeOutAndChangeTrack(currentTrackIndex);
     updateSongTitle(true);
 }
@@ -123,7 +120,7 @@ function playNextTrack() {
  * Play previous track
  */
 function playPreviousTrack() {
-    currentTrackIndex = (currentTrackIndex - 1 + musicList.length) % musicList.length;
+    currentTrackIndex = (currentTrackIndex - 1 + config.musicList.length) % config.musicList.length;
     fadeOutAndChangeTrack(currentTrackIndex);
     updateSongTitle(true);
 }
@@ -156,7 +153,7 @@ function toggleButtons(isDisabled) {
  * Updates the song title
  */
 function updateSongTitle(fade = false) {
-    const trackName = musicList[currentTrackIndex].split('/').pop().replace('.mp3', '');
+    const trackName = config.musicList[currentTrackIndex].split('/').pop().replace('.mp3', '');
 
     if (fade === false) {
         updateTitleText(trackName);

@@ -126,4 +126,11 @@ const config = {
         fadeInDuration: 1000,
     },
 
+    /**
+     * List of music tracks.
+     * @type {string[]}
+     */
+    musicList: [
+    ]
+
 };
