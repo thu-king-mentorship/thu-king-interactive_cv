@@ -1,8 +1,8 @@
-const songTitle = document.getElementById('song-title');
-const playPauseBtn = document.getElementById('play-pause-btn');
-const muteBtn = document.getElementById('mute-btn');
-const nextBtn = document.getElementById('next-btn');
-const prevBtn = document.getElementById('previous-btn');
+const songTitle = document.querySelector(config.selectors.music.songTitle);
+const playPauseBtn = document.querySelector(config.selectors.music.playPauseBtn);
+const muteBtn = document.querySelector(config.selectors.music.muteBtn);
+const nextBtn = document.querySelector(config.selectors.music.nextBtn);
+const prevBtn = document.querySelector(config.selectors.music.prevBtn);
 
 let currentTrackIndex = 0;
 let isPlaying = false;

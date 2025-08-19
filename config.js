@@ -4,6 +4,15 @@
 const config = {
 
     /**
+     * The title and subtitle of the game.
+     * @type {{title: string, subtitle: string}}
+     */
+    gameTitle: {
+        title: "Salvador Banderas Rovira",
+        subtitle: "Game Design, Narrative Design, Game Development",
+    },
+
+    /**
      * Debug mode for logging.
      * @type {boolean}
      */
@@ -58,6 +67,16 @@ const config = {
     terrainScaleFactor: 3,
 
     /**
+     * The zoom levels for the game.
+     * @type {{min: number, max: number, factor: number}}
+     */
+    zoomLevels: {
+        min: 0.8,
+        max: 2,
+        factor: 0.5,
+    },
+
+    /**
      * Size of the virtual camera.
      * @type {{width: number, height: number}}
      * @property {number} width - Width of the virtual camera.
@@ -66,6 +85,45 @@ const config = {
     resolution: {
         width: 1024,
         height: 768,
+    },
+
+    /**
+     * The objects on the map.
+     * @type {Array<{id: string, name: string, type: string, row: number, col: number}>}
+     */
+    mapObjects: [
+        { id: "interactable1", name: "Interactable 1", type: "interactable", row: 6, col: 14 },
+        { id: "interactable2", name: "Interactable 2", type: "interactable", row: 15, col: 9 },
+        { id: "interactable3", name: "Interactable 3", type: "interactable", row: 9, col: 21 },
+        { id: "obstacle1", name: "Obstacle 1", type: "obstacle", row: 14, col: 19 },
+    ],
+
+    /**
+     * The starting position of the character.
+     * @type {{row: number, col: number}}
+     */
+    character: {
+        startRow: 9,
+        startCol: 11,
+        transforms: {
+            0: { x: 50, y: 50 },
+            90: { x: -150, y: -25 },
+            180: { x: -50, y: -25 },
+            270: { x: 50, y: -25 },
+        }
+    },
+
+    /**
+     * Keybindings for the game.
+     * @type {{up: string[], down: string[], left: string[], right: string[], interact: string, cancel: string}}
+     */
+    keybindings: {
+        up: ['arrowup', 'w'],
+        down: ['arrowdown', 's'],
+        left: ['arrowleft', 'a'],
+        right: ['arrowright', 'd'],
+        interact: 'e',
+        cancel: 'q',
     },
 
     /**
@@ -131,6 +189,41 @@ const config = {
      * @type {string[]}
      */
     musicList: [
-    ]
+    ],
 
+    /**
+     * The selectors for the DOM elements.
+     * @type {{game: {cameraContainer: string, gameContainer: string, terrainContainer: string, terrain: string, character: string, collision: string, interactable: string, obstacle: string}, ui: {title: string, subtitle: string, textbox: string, statusBar: string}, music: {musicPlayer: string, musicControls: string, songTitle: string, prevBtn: string, playPauseBtn: string, muteBtn: string, nextBtn: string}, debug: {grid: string, gizmoContainer: string}}}
+     */
+    selectors: {
+        game: {
+            cameraContainer: '#camera-container',
+            gameContainer: '#game-container',
+            terrainContainer: '#terrain-container',
+            terrain: '#terrain',
+            character: '#character',
+            collision: '.collision',
+            interactable: '.interactable',
+            obstacle: '.obstacle',
+        },
+        ui: {
+            title: '#title',
+            subtitle: '#subtitle',
+            textbox: 'textbox',
+            statusBar: 'status-bar',
+        },
+        music: {
+            musicPlayer: '#music-player',
+            musicControls: '#music-controls',
+            songTitle: '#song-title',
+            prevBtn: '#previous-btn',
+            playPauseBtn: '#play-pause-btn',
+            muteBtn: '#mute-btn',
+            nextBtn: '#next-btn',
+        },
+        debug: {
+            grid: 'grid',
+            gizmoContainer: 'gizmo-container',
+        },
+    }
 };
